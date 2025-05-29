@@ -38,6 +38,7 @@ async function main() {
         create: {
             amount: 2000,
             locked: 0
+            
         }
       },
       OnRampTransaction: {

@@ -7,6 +7,9 @@ app.use(express.json())
 app.post("/hdfcWebhook", async (req, res) => {
     //TODO: Add zod validation here?
     //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
+    // TODO: CHeck if this onRampTxn is processing or not
+    console.log("inside webhook");
+    
     const paymentInformation: {
         token: string;
         userId: string;
@@ -16,6 +19,11 @@ app.post("/hdfcWebhook", async (req, res) => {
         userId: req.body.user_identifier,
         amount: req.body.amount
     };
+    console.log(paymentInformation)
+
+    if (isNaN(Number(paymentInformation.amount)) || isNaN(Number(paymentInformation.userId))) {
+    return res.status(400).json({ message: "Invalid input" });
+    }
 
     try {
         await db.$transaction([

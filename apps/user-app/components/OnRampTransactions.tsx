@@ -27,6 +27,13 @@ export const OnRampTransactions = ({
                     </div>
                     <div className="text-slate-600 text-xs">
                         {t.time.toDateString()}
+                        <div
+                        className={`font-semibold
+                        ${t.status === 'Processing' ? 'text-yellow-500' :
+                        t.status === 'Success' ? 'text-green-500' :
+                                                'text-red-500'}`}>
+                        {t.status}
+                    </div>
                     </div>
                 </div>
                 <div className="flex flex-col justify-center">
